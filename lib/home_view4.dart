@@ -1,5 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+class BlocType {
+  BlockTypes blockColor;
+  int index;
+  BlocType({
+    required this.blockColor,
+    required this.index,
+  });
+}
 
 class HomeView4 extends StatelessWidget {
   const HomeView4({super.key});
@@ -21,7 +31,7 @@ class HomeView4 extends StatelessWidget {
   }
 }
 
-const int redCount = 10000;
+const int redCount = 100000;
 
 const int allCount = 100000;
 const int crossAxisCount = 250;
@@ -126,19 +136,25 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Positioned(
-              left: value.dx - 200,
-              top: value.dy - 200,
-              child: Stack(
+              left: value.dx - 50,
+              top: value.dy - 50,
+              child: Container(
+                decoration: const BoxDecoration(color: Colors.red, boxShadow: [
+                  BoxShadow(
+                    blurRadius: 10,
+                    color: Colors.black,
+                    offset: Offset(0, 0),
+                  )
+                ]),
+                height: 50,
+                width: 50,
+              ) /* Stack(
                 alignment: Alignment.center,
                 children: [
                   const RawMagnifier(
-                    decoration: MagnifierDecoration(
-                      shape: CircleBorder(
-                        side: BorderSide(color: Colors.pink, width: 3),
-                      ),
-                    ),
-                    size: Size(200, 200),
-                    magnificationScale: 5,
+                    decoration: MagnifierDecoration(),
+                    size: Size(50, 50),
+                    magnificationScale: 30,
                     child: Text("selam"),
                   ),
                   Container(
@@ -147,7 +163,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.amber,
                   )
                 ],
-              ),
+              ) */
+              ,
             ),
           ],
         ),
@@ -175,15 +192,22 @@ class CustomGridView extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     blocs.asMap().forEach((index, bloc) {
       setColor(bloc);
+
+      Paint paint2 = Paint()
+        ..color = Colors.black
+        ..strokeCap = StrokeCap.butt
+        ..strokeWidth = 2 // getPixel(1)
+        ..style = PaintingStyle.fill;
+
       canvas.drawRRect(
           RRect.fromRectAndRadius(
               Rect.fromLTWH(
                 getLeft(index),
                 getTop(index),
-                blocSize - 0.2,
-                blocSize - 0.2,
+                1.6 - 0.2,
+                1.6 - 0.2,
               ),
-              const Radius.circular(1.0)),
+              const Radius.circular(0)),
           painter);
     });
   }
