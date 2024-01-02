@@ -38,6 +38,7 @@ dependencies:
   responsive_grid_list: ^1.4.0
   grid_paper: ^0.0.2
   flutter_layout_grid: ^2.0.5
+  flutter_randomcolor: ^1.0.14
 
 dev_dependencies:
   flutter_test:
