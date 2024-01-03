@@ -51,21 +51,20 @@ class HomeView4 extends StatelessWidget {
   }
 }
 
-const int redCount = 10000;
-
 const int allCount = 10000;
-const int crossAxisCount = 100;
+const int crossAxisCount = 80;
 
 //enum Color { red, yellow }
 
 class MyHomePage extends StatefulWidget {
   final Random random = Random();
-  var options = Options(format: Format.hex, colorType: ColorType.green);
+  // final options = Options(format: Format.hex, colorType: ColorType.green);
   MyHomePage({super.key}) {
     Data.blocks = List<Bloc>.generate(allCount, (index) {
-      String color = RandomColor.getColor(options);
+      //  String color = RandomColor.getColor(options);
 
-      return Bloc(blockColor: HexColor.fromHex(color), index: index);
+      return Bloc(
+          blockColor: Colors.red /* HexColor.fromHex(color) */, index: index);
     });
   }
 
@@ -125,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final tapedRow = (dx / blocSize).floor();
       final tapedColumn = (dy / blocSize).floor();
       onMoveIndex = tapedColumn * crossAxisCount + tapedRow;
-      if (onMoveIndex >= 0 && onMoveIndex <= 10000) {
+      if (onMoveIndex >= 0 && onMoveIndex < allCount) {
         return onMoveIndex;
       }
     }
@@ -216,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class CustomGridView extends CustomPainter {
-  final double gap = 1;
+  final double gap = 0.1;
   final Paint painter = Paint()
     ..strokeWidth = 5
     ..style = PaintingStyle.fill;
@@ -233,7 +232,7 @@ class CustomGridView extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Data.blocks.asMap().forEach((index, bloc) async {
+    Data.blocks.asMap().forEach((index, bloc) {
       setColor(bloc.blockColor);
 
 /*       Paint paint2 = Paint()
@@ -257,8 +256,6 @@ class CustomGridView extends CustomPainter {
               ),
               const Radius.circular(1)),
           painter);
-
-      await Future.delayed(Durations.medium1);
     });
   }
 
